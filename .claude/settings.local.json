@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr:*)",
+      "Bash(.venvScriptsactivate)",
+      "Bash(pushd:*)",
+      "Bash(\".venv\\\\Scripts\\\\activate\")",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\" -m pytest tests/ -v)",
+      "Bash(npx vitest:*)"
+    ]
+  }
+}
