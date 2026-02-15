@@ -1,7 +1,7 @@
 """Tests for BaseModel and model utilities."""
 from datetime import datetime
-from app import db
-from models import BaseModel
+from db import db
+from db.models import BaseModel
 
 
 # Concrete model for testing the abstract BaseModel

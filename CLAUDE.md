@@ -55,10 +55,10 @@ npm run preview   # preview production build
 
 ### Backend (`backend/`)
 
-- **`app.py`** — Application factory (`create_app()`), initializes `db` (SQLAlchemy instance), registers error handlers, serves frontend from `public/`
+- **`app.py`** — Application factory (`create_app()`), imports `db` from `db/` and calls `register_routes()` from `routes/`
 - **`config.py`** — Config classes keyed by `FLASK_ENV`: `DevelopmentConfig` (PostgreSQL), `TestingConfig` (SQLite in-memory), `ProductionConfig`
-- **`models.py`** — `BaseModel` abstract class with `id`, `created_at`, `updated_at`, and `to_dict()`. New models should inherit from it.
-- **`routes.py`** — Blueprint `api_bp` at `/api` prefix (not yet registered in `app.py` — uncomment the import/register lines when adding routes)
+- **`db/`** — Database package: `__init__.py` exports the `SQLAlchemy` instance (`db`), `models.py` contains `BaseModel` and all model definitions
+- **`routes/`** — Route package: `__init__.py` exports `register_routes(app)`, `api/` contains API blueprint and endpoint modules, `static/` serves frontend and error handlers
 - **`wsgi.py`** — Production WSGI entry point, also provides `flask shell` context
 - **`migrations/`** — Alembic migrations directory (versions currently empty)
 - **`tests/conftest.py`** — Pytest fixtures: `app` (session-scoped, uses `TestingConfig`), `client`, `db` (autouse, creates/drops tables per test)
@@ -88,6 +88,7 @@ npm run preview   # preview production build
 
 Detailed guidelines for working in each area of the codebase:
 
+- **[Project Structure](claude-docs/project-structure.md)** — `db/` and `routes/` package layout, how to add models, API routes, and static routes
 - **[UI Guidelines](claude-docs/ui.md)** — React component patterns, Chakra UI v3 usage, Redux Toolkit state management, routing, API calls, and linting rules
 - **[Backend Guidelines](claude-docs/backend.md)** — Flask app factory, blueprint registration, route conventions, testing setup and patterns, code quality tools
 - **[Models & Database Guidelines](claude-docs/models-and-database.md)** — BaseModel inheritance, creating new models, Alembic migration workflow, session management, naming conventions

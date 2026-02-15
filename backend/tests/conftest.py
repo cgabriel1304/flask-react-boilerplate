@@ -1,7 +1,8 @@
 """Pytest configuration"""
 import pytest
 import os
-from app import create_app, db as _db
+from app import create_app
+from db import db as _db
 
 
 @pytest.fixture(scope='session')

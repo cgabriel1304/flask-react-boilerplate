@@ -1,64 +1,64 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
+import { configureStore } from '@reduxjs/toolkit'
+import healthReducer from '../src/store/healthSlice'
 import App from '../src/App'
 
+function renderApp(route = '/') {
+  const store = configureStore({ reducer: { health: healthReducer } })
+  return render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={[route]}>
+        <ChakraProvider value={defaultSystem}>
+          <App />
+        </ChakraProvider>
+      </MemoryRouter>
+    </Provider>
+  )
+}
+
 describe('App', () => {
-  it('renders the heading', () => {
-    render(<App />)
-    expect(screen.getByText('Vite + React')).toBeInTheDocument()
+  beforeEach(() => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ status: 'healthy', message: 'running' }),
+    })
   })
 
-  it('renders Vite and React logos', () => {
-    render(<App />)
-    expect(screen.getByAltText('Vite logo')).toBeInTheDocument()
-    expect(screen.getByAltText('React logo')).toBeInTheDocument()
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 
-  it('renders the counter button with initial count of 0', () => {
-    render(<App />)
-    expect(screen.getByRole('button', { name: /count is 0/i })).toBeInTheDocument()
+  it('renders the home page by default', () => {
+    renderApp()
+    expect(screen.getByRole('heading', { name: /cyberitance/i })).toBeInTheDocument()
   })
 
-  it('increments count on button click', async () => {
+  it('renders a link to the status page', () => {
+    renderApp()
+    expect(screen.getByRole('link', { name: /backend status/i })).toBeInTheDocument()
+  })
+
+  it('navigates to the status page when link is clicked', async () => {
     const user = userEvent.setup()
-    render(<App />)
+    renderApp()
 
-    const button = screen.getByRole('button', { name: /count is 0/i })
-    await user.click(button)
-    expect(screen.getByRole('button', { name: /count is 1/i })).toBeInTheDocument()
+    await user.click(screen.getByRole('link', { name: /backend status/i }))
+    expect(screen.getByRole('heading', { name: /backend status/i })).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/healthy/)).toBeInTheDocument()
+    })
   })
 
-  it('increments count multiple times', async () => {
-    const user = userEvent.setup()
-    render(<App />)
-
-    const button = screen.getByRole('button', { name: /count is 0/i })
-    await user.click(button)
-    await user.click(button)
-    await user.click(button)
-    expect(screen.getByRole('button', { name: /count is 3/i })).toBeInTheDocument()
-  })
-
-  it('renders links to Vite and React docs', () => {
-    render(<App />)
-    const viteLink = screen.getByAltText('Vite logo').closest('a')
-    const reactLink = screen.getByAltText('React logo').closest('a')
-    expect(viteLink).toHaveAttribute('href', 'https://vite.dev')
-    expect(reactLink).toHaveAttribute('href', 'https://react.dev')
-  })
-
-  it('opens doc links in new tab', () => {
-    render(<App />)
-    const viteLink = screen.getByAltText('Vite logo').closest('a')
-    const reactLink = screen.getByAltText('React logo').closest('a')
-    expect(viteLink).toHaveAttribute('target', '_blank')
-    expect(reactLink).toHaveAttribute('target', '_blank')
-  })
-
-  it('renders HMR instruction text', () => {
-    render(<App />)
-    expect(screen.getByText(/Edit/)).toBeInTheDocument()
-    expect(screen.getByText('src/App.jsx')).toBeInTheDocument()
+  it('renders the status page directly', async () => {
+    renderApp('/status')
+    expect(screen.getByRole('heading', { name: /backend status/i })).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/healthy/)).toBeInTheDocument()
+    })
   })
 })

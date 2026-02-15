@@ -8,7 +8,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from app import db
+from db import db
 from config import config as app_config
 import os
 

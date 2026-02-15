@@ -6,7 +6,19 @@
       "Bash(pushd:*)",
       "Bash(\".venv\\\\Scripts\\\\activate\")",
       "Bash(\".venv\\\\Scripts\\\\python.exe\" -m pytest tests/ -v)",
-      "Bash(npx vitest:*)"
+      "Bash(npx vitest:*)",
+      "Bash(npm run test:*)",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\" -m pytest tests/test_health.py -v)",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\" -m pytest -v)",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\":*)",
+      "Bash(\".venv\\\\Scripts\\\\python.exe\" -c \"from wsgi import app; print\\(app\\)\")",
+      "Bash(ls -la \"D:\\\\projects\\\\flask-react-boilerplate\\\\backend\"\" | grep -E \".env)",
+      "Bash(.flaskenv)",
+      "Bash(wsgi)",
+      "Bash(Dockerfile)",
+      "Bash(docker \")",
+      "Bash(ls -la \"D:\\\\projects\\\\flask-react-boilerplate\\\\backend\"\" | grep -v \".venv|node_modules \")",
+      "Bash(.venv/Scripts/python -m pytest:*)"
     ]
   }
 }

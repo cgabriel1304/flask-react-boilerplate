@@ -2,11 +2,11 @@
 
 ## ORM
 
-SQLAlchemy 2.0 via Flask-SQLAlchemy. The `db` instance is created in `app.py` and shared across the app.
+SQLAlchemy 2.0 via Flask-SQLAlchemy. The `db` instance is created in `db/__init__.py` and shared across the app. Import it as `from db import db`.
 
 ## BaseModel
 
-All models must inherit from `BaseModel` (defined in `models.py`):
+All models must inherit from `BaseModel` (defined in `db/models.py`):
 
 ```python
 class BaseModel(db.Model):
@@ -25,7 +25,7 @@ class BaseModel(db.Model):
 
 ### Creating a New Model
 
-1. Define the model in `models.py` inheriting from `BaseModel`
+1. Define the model in `db/models.py` inheriting from `BaseModel`
 2. Set `__tablename__` explicitly
 3. Override `to_dict()` calling `super().to_dict()` and extending with model-specific fields
 4. Import the model in `migrations/env.py` so Alembic detects it for autogeneration
@@ -86,7 +86,7 @@ alembic history
 ## Session Management
 
 - Use `db.session` for all database operations
-- The 500 error handler in `app.py` calls `db.session.rollback()` automatically
+- The 500 error handler in `routes/static/__init__.py` calls `db.session.rollback()` automatically
 - In tests, the `db` fixture handles `session.remove()` and `drop_all()` after each test
 - Commit explicitly with `db.session.commit()` — Flask-SQLAlchemy does not auto-commit
 

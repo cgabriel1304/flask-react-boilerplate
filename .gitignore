@@ -235,5 +235,4 @@ out/
 # Docker (if used later)
 # ============================================================================
 
-.dockerignore
 docker-compose.override.yml
