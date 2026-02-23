@@ -7,5 +7,5 @@ def health_check():
     """Health check endpoint"""
     return jsonify({
         'status': 'healthy',
-        'message': 'Cyberitance backend is running'
+        'message': 'Flask-React Boilerplate backend is running'
     }), 200

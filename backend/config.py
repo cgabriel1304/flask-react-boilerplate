@@ -17,7 +17,7 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'DATABASE_URL',
-        'postgresql://cyberitance:cyberitance_pass@localhost:5432/cyberitance'
+        'postgresql://flask_react_boilerplate:flask_react_boilerplate_pass@localhost:5432/flask_react_boilerplate'
     )
 
 

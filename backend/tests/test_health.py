@@ -7,4 +7,4 @@ class TestHealthCheck:
         response = client.get('/api/health')
         data = response.get_json()
         assert data['status'] == 'healthy'
-        assert data['message'] == 'Cyberitance backend is running'
+        assert data['message'] == 'Flask-React Boilerplate backend is running'

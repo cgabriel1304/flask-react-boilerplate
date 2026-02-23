@@ -82,7 +82,7 @@ npm run preview   # preview production build
 
 - PostgreSQL in dev/prod, SQLite in-memory for tests
 - Connection configured via `DATABASE_URL` env var in `backend/.env`
-- Config falls back to `postgresql://cyberitance:cyberitance_pass@localhost:5432/cyberitance`
+- Config falls back to `postgresql://flask_react_boilerplate:flask_react_boilerplate_pass@localhost:5432/flask_react_boilerplate`
 
 ## Guidelines
 

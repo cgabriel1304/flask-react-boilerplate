@@ -79,7 +79,7 @@ alembic history
 
 | Environment | Database | Source |
 |---|---|---|
-| Development | PostgreSQL | `DATABASE_URL` in `.env`, falls back to `postgresql://cyberitance:cyberitance_pass@localhost:5432/cyberitance` |
+| Development | PostgreSQL | `DATABASE_URL` in `.env`, falls back to `postgresql://flask_react_boilerplate:flask_react_boilerplate_pass@localhost:5432/flask_react_boilerplate` |
 | Testing | SQLite in-memory | Hardcoded in `TestingConfig` |
 | Production | PostgreSQL | `DATABASE_URL` env var (required) |
 

@@ -208,7 +208,7 @@ Create a `.env` file in the `frontend/` directory if needed:
 
 ```env
 VITE_API_URL=http://localhost:5000
-VITE_APP_TITLE=Cyberitance
+VITE_APP_TITLE=Flask-React Boilerplate
 ```
 
 ### Step 4: Configure Vite for Backend Integration
@@ -292,6 +292,20 @@ Visit:
    ```
 
 3. Visit: http://localhost:5000
+
+
+4. ** Using Docker Compose file
+   ```
+   cd  /<project_root_>
+
+   # build the application for production deployment containerized
+   docker compose build
+
+   # run the application
+   docker compose up
+
+   # the app will be serverd with nginx on http://localhost:80
+   ```
 
 ## Technology Stack
 
@@ -402,7 +416,7 @@ npm run preview
 
 ```bash
 # Test PostgreSQL connection
-psql -U cyberitance -d cyberitance -h localhost -W
+psql -U flask_react_boilerplate -d flask_react_boilerplate -h localhost -W
 
 # If port 5432 is in use, check PostgreSQL service status on Windows:
 # - Check Services (services.msc) for PostgreSQL entry

@@ -42,7 +42,7 @@ describe('BackendStatus', () => {
   it('displays health data after successful fetch', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
-      json: () => Promise.resolve({ status: 'healthy', message: 'Cyberitance backend is running' }),
+      json: () => Promise.resolve({ status: 'healthy', message: 'Flask-React Boilerplate backend is running' }),
     })
 
     renderBackendStatus()
@@ -50,7 +50,7 @@ describe('BackendStatus', () => {
     await waitFor(() => {
       expect(screen.getByText(/healthy/)).toBeInTheDocument()
     })
-    expect(screen.getByText(/Cyberitance backend is running/)).toBeInTheDocument()
+    expect(screen.getByText(/Flask-React Boilerplate backend is running/)).toBeInTheDocument()
   })
 
   it('shows error message on fetch failure', async () => {

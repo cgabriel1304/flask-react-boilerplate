@@ -35,7 +35,7 @@ describe('App', () => {
 
   it('renders the home page by default', () => {
     renderApp()
-    expect(screen.getByRole('heading', { name: /cyberitance/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /flask-react boilerplate/i })).toBeInTheDocument()
   })
 
   it('renders a link to the status page', () => {
