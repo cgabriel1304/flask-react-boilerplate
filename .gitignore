@@ -118,8 +118,7 @@ frontend/.vite/
 # ============================================================================
 
 # Frontend build output in backend
-# Keep index.html for testing
-#backend/public/*
+backend/public
 #!backend/public/
 #!backend/public/index.html
 
@@ -242,4 +241,3 @@ docker-compose.override.yml
 # Remove all py cache and compiled files from the backend
 # ============================================================================
 __pycache__
-#backend/public/index.html
