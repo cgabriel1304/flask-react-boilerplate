@@ -241,5 +241,5 @@ docker-compose.override.yml
 # ============================================================================
 # Remove all py cache and compiled files from the backend
 # ============================================================================
-# __pycache__
-# public/*
+__pycache__
+#backend/public/index.html
